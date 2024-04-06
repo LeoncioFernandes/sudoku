@@ -3,6 +3,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Validacoes {
+
+    //REMOVER AS REPETIÇÕES QUANDO A MATRIX É GERADA
     public static void removerRepeticoes(String[][] matriz) {
         
         //Remover números repetidos BLOCO (SEPARANDO O BLOCO 3 X 3)

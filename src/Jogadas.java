@@ -44,7 +44,7 @@ public class Jogadas {
         return coluna;
     }
 
-    //Jogada de Valor
+    //Jogada de VALOR
     public static int JogadaValor(String[][] matriz, ArrayList<String[]> linhasColunasFixas){
         Scanner teclado = new Scanner(System.in);
         int valor = 0;

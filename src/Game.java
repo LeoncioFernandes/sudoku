@@ -96,6 +96,7 @@ public class Game {
         }
     }
 
+    //VERIFICAR SE O USUÁRIO CONSEGUIU PREENCHER todo O SUDOKU
     public static boolean Vitoria(String[][] matriz){
         for (int linha = 0; linha < matriz.length; linha++) {
             for (int coluna = 0; coluna < matriz[linha].length; coluna++) {
