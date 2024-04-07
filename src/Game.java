@@ -46,6 +46,7 @@ public class Game {
         Validacoes.removerRepeticoes(matriz);
 
         //Carrega o ArrayList com as LINHAS e COLUNAS que são FIXAS (não pode ser modificadas)
+        linhasColunasFixas.clear();
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[i].length; j++) {
                 if (!matriz[i][j].equals("*")) {
@@ -56,24 +57,31 @@ public class Game {
 
     } 
 
-    //VERIFICAR SE USUÁRIO DESEJA CONTINUAR JOGO
-    public static char EndGame(String[][] matriz, ArrayList<String[]> linhasColunasFixas){
-        Scanner teclado = new Scanner(System.in);
-        char continuarGame = '0';
-
+    //CONFIRMAR SAÍDA
+    public static boolean SairGame(String[][] matriz, ArrayList<String[]> linhasColunasFixas) {
         while (true) {
-            System.out.println("Deseja continuar o jogo? ( S / N ) ");
-            continuarGame = Character.toUpperCase(teclado.next().charAt(0));
-            if (continuarGame == 'S' || continuarGame == 'N') {
-                break;
-            }else{
-                LimparCmd.clean();
-                System.out.println("DIGITE S para SIM ou N para NÃO\n");
-                ImprimirGame.ImprimirJogo(matriz, linhasColunasFixas);
+            System.out.println("Deseja sair do jogo? ( S / N ) ");
+            Scanner teclado = new Scanner(System.in);
+            char sairGame = Character.toUpperCase(teclado.next().charAt(0));
+
+            switch (sairGame) {
+                case 'S':
+                    return true;
+                case 'N':
+                    return false;
+                default:
+                    LimparCmd.clean();
+                    System.out.println("DIGITE S para SIM ou N para NÃO\n");
+                    ImprimirGame.ImprimirJogo(matriz, linhasColunasFixas);
             }
         }
+    }
 
-        return continuarGame; 
+    //IMPRIMIR MENSAGEM DE SÁIDA
+    public static void ImprimirSaida(String[][] matriz, ArrayList<String[]> linhasColunasFixas) {
+        LimparCmd.clean();
+        ImprimirGame.ImprimirJogo(matriz, linhasColunasFixas);
+        System.out.println("ATÉ MAIS!\n");
     }
 
     //VERIFICAR SE USUÁRIO DESEJA REINICIAR JOGO APÓS VITÓRIA

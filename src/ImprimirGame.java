@@ -6,6 +6,7 @@ public class ImprimirGame {
         
         //CABEÇALHO
         int codAscii = 65;
+        System.out.println("Digite S para sair do jogo \n");
         System.out.println("    A B C | D E F | G H I");
         System.out.println("   - - - - - - - - - - - -");
 

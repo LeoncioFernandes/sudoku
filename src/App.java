@@ -33,30 +33,42 @@ public class App {
             
             //Jogada de LINHA
             char linha = Jogadas.JogadaLinha(matriz, linhasColunasFixas);
+            if(linha == 'S'){
+                Game.ImprimirSaida(matriz, linhasColunasFixas);
+                break;
+            }
+
             //Jogada de COLUNA
             char coluna = Jogadas.JogadaColuna(matriz, linhasColunasFixas);
+            if(coluna == 'S'){
+                Game.ImprimirSaida(matriz, linhasColunasFixas);
+                break;
+            }
             //Validar se LINHA e COLUNA pode receber Jogada
             boolean contem = Validacoes.validarLinhasColunasFixas(linha, coluna, linhasColunasFixas);
-
-            char continuarGame = '0';
 
             //Se LINHA E COLUNA digitadas estão CONTIDAS no arrayList linhasColunasFixas (true), não será permitida a jogada!
             if (contem) {
                 LimparCmd.clean();
                 ImprimirGame.ImprimirJogo(matriz, linhasColunasFixas);
                 System.out.println("Não é possível jogar na linha " + (char)linha + " e na coluna " + (char)coluna);
-                continuarGame = Game.EndGame(matriz, linhasColunasFixas);
             } else {
+                
                 //Jogada de VALOR
-                int valor = Jogadas.JogadaValor(matriz, linhasColunasFixas);
+                char valor = Jogadas.JogadaValor(matriz, linhasColunasFixas);
+                if(valor == 'S'){
+                    Game.ImprimirSaida(matriz, linhasColunasFixas);
+                    break;
+                }
 
                 //Validar repetições
-                boolean numRepetido = Validacoes.validarJogada(valor, linha, coluna, matriz);
+                int val = Character.getNumericValue(valor);
+                boolean numRepetido = Validacoes.validarJogada(val, linha, coluna, matriz);
 
                 //Se o Valor jogado NÃO estava repetido dentro das condições de validação (false), segue gravação da jogada em matriz
                 if(!numRepetido){
 
-                    matriz[linha - 65][coluna - 65] = String.valueOf(valor);
+                    matriz[linha - 65][coluna - 65] = String.valueOf(val);
                     LimparCmd.clean();
                     ImprimirGame.ImprimirJogo(matriz, linhasColunasFixas);
 
@@ -66,29 +78,16 @@ public class App {
                         
                         newGame = Game.ReiniciarGame();
 
-                        //Caso a resposta para ReiniciarGame seja negativa (false), preenche continuarGame com 'N'
+                        //Caso a resposta para ReiniciarGame seja negativa (false), finaliza do loop e encerra o programa
                         if (!newGame) {
-                            continuarGame = 'N';
+                            LimparCmd.clean();
+                            ImprimirGame.ImprimirJogo(matriz, linhasColunasFixas);
+                            System.out.println("ATÉ MAIS!\n");
+                            break;
                         }
-                    } else {
-                        continuarGame = Game.EndGame(matriz, linhasColunasFixas);
-                    }
-                    
-                }else{
-                    continuarGame = Game.EndGame(matriz, linhasColunasFixas);
-                }
-                
-                
-            }
-            
-            //Se continuarGame for 'N', finaliza o While e encerra o programa
-            if (continuarGame == 'N') {
-                LimparCmd.clean();
-                ImprimirGame.ImprimirJogo(matriz, linhasColunasFixas);
-                System.out.println("ATÉ MAIS!\n");
-                break;
+                    }  
+                } 
             }
         }
-        
     }   
 }
